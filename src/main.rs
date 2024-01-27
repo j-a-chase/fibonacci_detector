@@ -20,9 +20,6 @@ use std::fs::remove_file;
 // This allows us to read in the sequences.txt file so that we can 
 use std::fs::read_to_string;
 
-// This allows us to get user input
-use std::io;
-
 // This function very simply reads in the file and compiles it into a vector of Strings
 fn read_lines(filename: &str) -> Vec<String> {
     read_to_string(filename)
@@ -58,6 +55,9 @@ fn detect_fibonacci(seq: Vec<i32>) -> bool {
 // This function handles each sequence provided in sequences.txt
 fn compute_sequences(lines: Vec<String>) {
     for seq in lines {
+        // handle if blank line
+        if seq.len() == 0 { continue; }
+
         // new vector to hold the converted numbers from the provided sequence String
         let mut new_vec: Vec<i32> = Vec::new();
         
