@@ -5,47 +5,61 @@
 //
 // This program will be able to detect if a given number sequence is a Fibonacci sequence.
 
-use std::io;
+use std::io::Write;
+use std::fs::File;
+use std::path::Path;
+use std::fs::remove_file;
+use std::fs::read_to_string;
 
-fn fibonacci(n: usize) -> Vec<i32> {
-    if n == 1 {
-        return vec![0i32];
-    }
-    if n == 2 {
-        return vec![0i32, 1];
-    }
-    let mut i: usize = 2;
-    let mut seq = vec![0i32, 1];
-    while i < n {
-        seq.push(seq[i-1] + seq[i-2]);
-        i += 1;
+fn read_lines(filename: &str) -> Vec<String> {
+    read_to_string(filename)
+        .unwrap()
+        .lines()
+        .map(String::from)
+        .collect()
+}
+
+fn detect_fibonacci(seq: &Vec<i32>) -> bool {
+    let mut i = seq.len() - 1;
+    while i > 2 {
+        if seq[i] != seq[i-1] + seq[i-2] {
+            return false;
+        }
+
+        i -= 1;
     }
 
-    seq
+    true
+}
+
+fn compute_sequences(lines: Vec<String>) {
+    for seq in lines {
+        let mut new_vec: Vec<i32> = Vec::new();
+        for split in seq.trim().split_whitespace() {
+            new_vec.push(split.parse().expect("Error parsing number"));
+        }
+        let _ = write_results(&new_vec);
+    }
+}
+
+fn write_results(seq: &Vec<i32>) -> std::io::Result<()> {
+    let result = detect_fibonacci(&seq);
+    let mut file = File::options().create(true).append(true).open("results.txt")?;
+    writeln!(&mut file, "{result}")?;
+    Ok(())
+}
+
+fn clean_results() -> std::io::Result<()> {
+    if Path::new("results.txt").exists() {
+        remove_file("results.txt")?;
+    }
+    Ok(())
 }
 
 fn main() {
-    // Due to scoping, this is all in a loop to make sure input is valid, but it's really only meant to loop the input if it's invalid.
-    loop {
-        println!("Enter the number of numbers you'd like to see from the fibonacci sequence [1-47]:");
-        let mut input = String::new();
-        io::stdin()
-            .read_line(&mut input)
-            .expect("Failed to read line.");
-        let input: usize = match input.trim().parse() {
-            Ok(input) => input,
-    
-            // the underscore here is a catchall value.
-            Err(_) => continue,
-        };
+    let _ = clean_results();
 
-        if input < 1 || input > 47 {
-            println!("Invalid input!");
-            continue;
-        }
-        
-        let f = fibonacci(input);
-        println!("{f:?}");
-        break;
-    }
+    let file_lines = read_lines("sequences.txt");
+
+    compute_sequences(file_lines);
 }
