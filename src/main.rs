@@ -36,6 +36,10 @@ fn read_lines(filename: &str) -> Vec<String> {
 fn detect_fibonacci(seq: Vec<i32>) -> bool {
     // start from the end of the sequence
     let mut i = seq.len() - 1;
+
+    // if the sequence is 2 or less in length, it is not a valid Fibonacci sequence
+    if i < 2 { return false; }
+
     // iterate while we're still not at the first two numbers
     while i > 1 {
 
