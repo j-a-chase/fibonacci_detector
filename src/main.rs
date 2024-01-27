@@ -7,7 +7,7 @@
 // For the purpose of this project, a sequence is determined to be a Fibonacci sequence if after the first two numbers in the sequence, every
 // following number is the sum of the two numbers preceeding it in the sequence.
 
-// include proper imports for functions
+// include proper imports for functions ------------------
 
 // These allow us to write the results
 use std::io::Write;
@@ -19,6 +19,8 @@ use std::fs::remove_file;
 
 // This allows us to read in the sequences.txt file so that we can 
 use std::fs::read_to_string;
+
+// ---------------------------------
 
 // This function very simply reads in the file and compiles it into a vector of Strings
 fn read_lines(filename: &str) -> Vec<String> {
