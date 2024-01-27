@@ -58,8 +58,8 @@ fn compute_sequences(lines: Vec<String>) {
         // handle if blank line
         if seq.len() == 0 { continue; }
 
-        // handle if character in sequence is not a digit
-        if !seq.chars().all(char::is_numeric) { continue; }
+        // handle if a character in sequence is not a digit
+        if !seq.chars().filter(|c| !c.is_whitespace()).all(char::is_numeric) { continue; }
 
         // new vector to hold the converted numbers from the provided sequence String
         let mut new_vec: Vec<i32> = Vec::new();
