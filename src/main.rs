@@ -17,7 +17,7 @@ use std::fs::File;
 use std::path::Path;
 use std::fs::remove_file;
 
-// This allows us to read in the sequences.txt file so that we can 
+// This allows us to read in the sequences.txt file
 use std::fs::read_to_string;
 
 // ---------------------------------
