@@ -4,7 +4,7 @@ This project is a simple Rust program that can detect via a given file input (se
 
 I wrote this software because I believe that it's a super fun way to apply some of the Rust knowledge I gained as I explored this new language recently. I hadn't gotten quite to the point of using file I/O, but I was able to find resources to help me figure that stuff out and design this program the way I wanted it to be implemented!
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/UND49xc1Qb8)
 
 # Development Environment
 
