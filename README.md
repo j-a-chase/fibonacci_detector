@@ -27,3 +27,4 @@ I developed this program using VSCode as my IDE. The Rust programming language w
 - Add ability for user to give one sequence and get response in the console.
 - Improve handling of file input
 - Improve file output, so that it's more clear what the results correlate to.
+- Change how handling of characters works, so that false value is returned instead of skipping the line.
